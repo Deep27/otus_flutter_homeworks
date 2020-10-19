@@ -24,7 +24,11 @@ class Instructions extends StatelessWidget {
             ...cocktail.instruction
                 .split('\n')
                 .map((s) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: const EdgeInsets.only(
+                        top: 8.0,
+                        bottom: 8.0,
+                        right: 24.0,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
