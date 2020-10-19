@@ -12,7 +12,7 @@ class ImageHeader extends StatelessWidget {
         Image.asset(imagePath),
         const Positioned(
           child: const Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(24.0),
             child: const Icon(
               Icons.arrow_back,
             ),
@@ -21,7 +21,7 @@ class ImageHeader extends StatelessWidget {
         const Positioned(
           right: 0,
           child: const Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(24.0),
             child: const Icon(
               Icons.open_in_new,
             ),
