@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homework/models/models.dart';
-import 'package:homework/pages/cocktail_detail/widgets/cocktail_details.dart';
+import 'package:homework/pages/cocktail_detail/widgets/cocktail_info.dart';
+import 'package:homework/pages/cocktail_detail/widgets/cocktail_ingredients.dart';
 import 'package:homework/pages/cocktail_detail/widgets/cocktail_rating.dart';
 import 'package:homework/pages/cocktail_detail/widgets/image_header.dart';
 
@@ -21,7 +22,8 @@ class CocktailDetailPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ImageHeader('assets/images/mohito.jpg'),
-              CocktailDetails(cocktail),
+              CocktailInfo(cocktail),
+              CocktailIngredients(cocktail),
               CocktailRating(cocktail),
             ],
           ),
