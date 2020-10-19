@@ -4,6 +4,7 @@ import 'package:homework/pages/cocktail_detail/widgets/cocktail_info.dart';
 import 'package:homework/pages/cocktail_detail/widgets/cocktail_ingredients.dart';
 import 'package:homework/pages/cocktail_detail/widgets/cocktail_rating.dart';
 import 'package:homework/pages/cocktail_detail/widgets/image_header.dart';
+import 'package:homework/pages/cocktail_detail/widgets/instructions.dart';
 
 class CocktailDetailPage extends StatelessWidget {
   const CocktailDetailPage(
@@ -24,6 +25,7 @@ class CocktailDetailPage extends StatelessWidget {
               ImageHeader('assets/images/mohito.jpg'),
               CocktailInfo(cocktail),
               CocktailIngredients(cocktail),
+              Instructions(cocktail),
               CocktailRating(cocktail),
             ],
           ),
@@ -32,4 +34,3 @@ class CocktailDetailPage extends StatelessWidget {
     );
   }
 }
-
