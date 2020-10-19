@@ -21,4 +21,12 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/mohito.jpg
+  fonts:
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/AppIcons.ttf
+    - family: BebasNeue
+      fonts:
+        - asset: assets/fonts/bebas_neue_dharma/ttf/BebasNeue-Regular.ttf
+          style: italic
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homework/models/models.dart';
+import 'package:homework/pages/cocktail_detail/widgets/cocktail_details.dart';
 import 'package:homework/pages/cocktail_detail/widgets/cocktail_rating.dart';
 import 'package:homework/pages/cocktail_detail/widgets/image_header.dart';
 
@@ -11,8 +12,6 @@ class CocktailDetailPage extends StatelessWidget {
 
   final Cocktail cocktail;
 
-  static const String textBgColor = '#201f2b';
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,6 +21,7 @@ class CocktailDetailPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ImageHeader('assets/images/mohito.jpg'),
+              CocktailDetails(cocktail),
               CocktailRating(cocktail),
             ],
           ),

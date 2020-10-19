@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homework/models/models.dart';
-
-const Color ratingBgColor = Color(0xff1a1926);
-const Color ratingStarBgColor = Color(0xff2a2939);
+import 'package:homework/res/colors.dart';
 
 class CocktailRating extends StatelessWidget {
   CocktailRating(this.cocktail);
@@ -12,9 +10,9 @@ class CocktailRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
       width: double.infinity,
-      color: ratingBgColor,
+      color: AppColors.ratingBgColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -37,11 +35,11 @@ class _Star extends StatelessWidget {
       child: Container(
         width: 48.0,
         height: 48.0,
-        color: ratingStarBgColor,
+        color: AppColors.ratingStarBgColor,
         child: Icon(
           Icons.star,
           size: 32.0,
-          color: active ? Theme.of(context).iconTheme.color : ratingBgColor,
+          color: active ? Theme.of(context).iconTheme.color : AppColors.ratingBgColor,
         ),
       ),
     );

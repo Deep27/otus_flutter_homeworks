@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homework/res/res.dart';
 
 import 'pages/cocktail_detail/cocktail_detail_page.dart';
 import 'models/src/repository/sync_cocktail_repository.dart';
@@ -8,14 +9,10 @@ void main() {
   runApp(
     MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-          size: 24.0,
-        ),
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-        ),
+        iconTheme: buildAppIconTheme(),
+        textTheme: buildAppTextTheme(),
       ),
       home: Material(
         child: CocktailDetailPage(cocktail),
