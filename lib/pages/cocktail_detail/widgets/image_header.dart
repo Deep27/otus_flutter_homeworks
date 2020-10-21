@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
 
 class ImageHeader extends StatelessWidget {
   ImageHeader(this.imagePath);
 
   final String imagePath;
+
+  final AsyncCocktailRepository cocktailApi = AsyncCocktailRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +21,17 @@ class ImageHeader extends StatelessWidget {
             ),
           ),
         ),
-        const Positioned(
+        Positioned(
           right: 0,
-          child: const Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: const Icon(
-              Icons.open_in_new,
+          child: GestureDetector(
+            onTap: () {
+              cocktailApi.lookupIngredientById(552);
+            },
+            child: const Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: const Icon(
+                Icons.open_in_new,
+              ),
             ),
           ),
         ),

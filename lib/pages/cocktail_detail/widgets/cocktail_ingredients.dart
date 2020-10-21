@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cocktaildbhttpusing/src/models.dart';
+import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
 
 class CocktailIngredients extends StatelessWidget {
   CocktailIngredients(this.cocktail);
 
   final Cocktail cocktail;
+  final AsyncCocktailRepository cocktailRepo = AsyncCocktailRepository();
 
   @override
   Widget build(BuildContext context) {
