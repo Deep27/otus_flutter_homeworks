@@ -1,7 +1,7 @@
+import 'package:cocktaildbhttpusing/src/models.dart';
 import 'package:flutter/material.dart';
-import 'package:homework/models/models.dart';
-import 'package:homework/res/app_icons.dart';
-import 'package:homework/res/colors.dart';
+import 'package:cocktaildbhttpusing/res/app_icons.dart';
+import 'package:cocktaildbhttpusing/res/colors.dart';
 
 class CocktailInfo extends StatelessWidget {
   CocktailInfo(this.cocktail);

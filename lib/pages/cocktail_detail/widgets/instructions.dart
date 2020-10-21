@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homework/models/models.dart';
-import 'package:homework/res/colors.dart';
+import 'package:cocktaildbhttpusing/src/models.dart';
+import 'package:cocktaildbhttpusing/res/colors.dart';
 
 class Instructions extends StatelessWidget {
   Instructions(this.cocktail);

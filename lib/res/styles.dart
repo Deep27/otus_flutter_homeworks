@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:homework/res/colors.dart';
+import 'package:cocktaildbhttpusing/res/colors.dart';
 
 //const String _bebasFontFamily = 'BebasNeue';
 

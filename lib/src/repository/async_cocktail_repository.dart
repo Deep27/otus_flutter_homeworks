@@ -1,7 +1,15 @@
 import 'dart:convert' as convert;
 import 'dart:io';
 
-import 'package:homework/models/src/model/cocktail.dart';
+import 'package:cocktaildbhttpusing/src/models.dart';
+import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
+import 'package:cocktaildbhttpusing/src/dto/cocktail_dto.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
+import 'package:cocktaildbhttpusing/src/model/glass_type.dart';
+import 'package:cocktaildbhttpusing/src/model/ingredient_definition.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {

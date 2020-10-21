@@ -1,4 +1,8 @@
-import '../../models.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
+import 'package:cocktaildbhttpusing/src/model/glass_type.dart';
+import 'package:cocktaildbhttpusing/src/model/ingredient_definition.dart';
 
 class SyncCocktailRepository {
   static Iterable<Cocktail> _innerCache;

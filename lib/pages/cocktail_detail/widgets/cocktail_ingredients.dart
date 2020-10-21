@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homework/models/models.dart';
+import 'package:cocktaildbhttpusing/src/models.dart';
 
 class CocktailIngredients extends StatelessWidget {
   CocktailIngredients(this.cocktail);
