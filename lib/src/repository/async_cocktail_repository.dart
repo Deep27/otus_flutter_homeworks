@@ -12,11 +12,9 @@ import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {
-  static const String _apiKey =
-      'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b';
-
   static const Map<String, String> _headers = const {
-    'x-rapidapi-key': _apiKey,
+    'x-rapidapi-key': 'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b',
+    'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
   };
 
   Future<Cocktail> fetchCocktailDetails(String id) async {
@@ -55,13 +53,7 @@ class AsyncCocktailRepository {
     try {
       final url =
           'https://the-cocktail-db.p.rapidapi.com/filter.php?a=${cocktailType.value}';
-      var response = await http.get(
-        url,
-        headers: {
-          'x-rapidapi-key':
-              'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b',
-        },
-      );
+      var response = await http.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
@@ -95,13 +87,7 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       const url = 'https://the-cocktail-db.p.rapidapi.com/popular.php';
-      var response = await http.get(
-        url,
-        headers: {
-          'x-rapidapi-key':
-              'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b',
-        },
-      );
+      var response = await http.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
@@ -159,10 +145,7 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       final url = 'https://rapidapi.p.rapidapi.com/lookup.php?iid=$id';
-      var response = await http.get(url, headers: {
-        'x-rapidapi-key': _apiKey,
-        'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
-      });
+      var response = await http.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var ingredients = jsonResponse['ingredients'] as Iterable<dynamic>;
