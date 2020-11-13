@@ -1,0 +1,34 @@
+name: cocktaildbhttpusing
+description: Dart Async lesson
+version: 0.0.1
+
+environment:
+  sdk: ">=2.9.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+  json_annotation: ^3.0.1
+  http: ^0.12.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic: ^1.9.0
+  build_runner: ^1.10.1
+  json_serializable: ^3.4.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/mohito.jpg
+  fonts:
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/AppIcons.ttf
+    - family: BebasNeue
+      fonts:
+        - asset: assets/fonts/bebas_neue_dharma/ttf/BebasNeue-Regular.ttf
+          style: italic
+
