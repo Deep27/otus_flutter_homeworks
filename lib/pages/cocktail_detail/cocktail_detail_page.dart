@@ -1,3 +1,4 @@
+import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cocktaildbhttpusing/src/models.dart';
 import 'package:cocktaildbhttpusing/pages/cocktail_detail/widgets/cocktail_info.dart';
@@ -16,9 +17,9 @@ class CocktailDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
