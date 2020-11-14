@@ -1,17 +1,21 @@
 import 'dart:async';
 import 'dart:convert' as convert;
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
+import 'package:cocktaildbhttpusing/src/repository/query_status.dart';
+import 'package:cocktaildbhttpusing/src/repository/response.dart';
 import 'package:http/http.dart' as http;
 
 class CocktailCategoryService {
-  final _cocktailCategoryStreamController = StreamController.broadcast();
+  final _cocktailCategoryStreamController =
+      StreamController<Response<List<CocktailDefinition>>>.broadcast();
 
-  Stream get onCocktailReceiveEvent => _cocktailCategoryStreamController.stream;
+  Stream<Response<List<CocktailDefinition>>> get onCocktailReceiveEvent =>
+      _cocktailCategoryStreamController.stream;
 
   void dispose() {
     _cocktailCategoryStreamController?.close();
@@ -19,6 +23,9 @@ class CocktailCategoryService {
 
   Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(
       CocktailCategory category) async {
+    _cocktailCategoryStreamController
+        .add(Response(status: QueryStatus.waiting));
+
     var result = <CocktailDefinition>[];
 
     final url =
@@ -45,8 +52,13 @@ class CocktailCategoryService {
         ));
       }
     } else {
-      throw HttpException('Request failed with status: ${response.statusCode}');
+//      throw HttpException('Request failed with status: ${response.statusCode}');
+      _cocktailCategoryStreamController
+          .addError('Error occured: status code ${response.statusCode}');
     }
+
+    _cocktailCategoryStreamController.add(Response<List<CocktailDefinition>>(
+        status: QueryStatus.success, response: result.toList()));
 
     return result;
   }
