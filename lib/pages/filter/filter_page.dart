@@ -1,3 +1,4 @@
+import 'package:cocktaildbhttpusing/pages/common/loading.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktail_type_filter.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
@@ -47,14 +48,14 @@ class FilterPage extends StatelessWidget {
                     );
                   } else {
                     return Expanded(
-                      child: Center(child: CircularProgressIndicator()),
+                      child: Center(child: Loading()),
                     );
                   }
                 } else if (snapshot.hasError) {
                   return Expanded(child: Center(child: Text(snapshot.error)));
                 } else {
                   return Expanded(
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(child: Loading()),
                   );
                 }
               },
