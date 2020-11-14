@@ -1,5 +1,5 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
-import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
+//import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/query_status.dart';
 import 'package:cocktaildbhttpusing/src/repository/response.dart';
@@ -27,8 +27,8 @@ class CocktailTypeFilter extends StatelessWidget {
       child: StreamBuilder(
         stream: cocktailCategoryService.onCocktailReceiveEvent,
         builder: (stream, snapshot) {
-//          final isNotActive =
-//              snapshot.connectionState != ConnectionState.active;
+          // @TODO проверить, принял ли данные sink (не используя класс Response)
+          // @TODO чтобы все кнопки стали активными
           final hasData = snapshot.hasError ||
               (snapshot.hasData &&
                   ((snapshot.data as Response).status != QueryStatus.waiting));
@@ -40,8 +40,6 @@ class CocktailTypeFilter extends StatelessWidget {
                     onTap: () => cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(c),
                   ))
-              // @TODO проверить, принял ли данные sink
-              // @TODO чтобы все кнопки стали активными
               ?.toList();
           return CustomScrollView(
             scrollDirection: Axis.horizontal,

@@ -54,7 +54,7 @@ class CocktailCategoryService {
     } else {
 //      throw HttpException('Request failed with status: ${response.statusCode}');
       _cocktailCategoryStreamController
-          .addError('Error occured: status code ${response.statusCode}');
+          .addError('Status code ${response.statusCode}');
     }
 
     _cocktailCategoryStreamController.add(Response<List<CocktailDefinition>>(

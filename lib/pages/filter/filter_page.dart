@@ -1,5 +1,6 @@
 import 'package:cocktaildbhttpusing/pages/common/loading.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktail_type_filter.dart';
+import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktails_grid.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
@@ -36,21 +37,16 @@ class FilterPage extends StatelessWidget {
                       snapshot.data as Response<List<CocktailDefinition>>;
                   if (response.status == QueryStatus.success) {
                     return Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: (snapshot.data
-                                  as Response<List<CocktailDefinition>>)
-                              .response
-                              .map((cd) => Text(cd.name))
-                              .toList(),
-                        ),
-                      ),
+                      child: CocktailsGrid((snapshot.data
+                      as Response<List<CocktailDefinition>>)
+                          .response),
                     );
                   } else {
                     return Expanded(
                       child: Center(child: Loading()),
                     );
                   }
+                  // @TODO не удается попасть в блок
                 } else if (snapshot.hasError) {
                   return Expanded(child: Center(child: Text(snapshot.error)));
                 } else {
