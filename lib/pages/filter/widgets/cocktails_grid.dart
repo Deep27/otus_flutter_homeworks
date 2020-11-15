@@ -12,7 +12,7 @@ class CocktailsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       crossAxisCount: 2,
-      childAspectRatio: 1.0,
+      childAspectRatio: 2 / 3,
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
       mainAxisSpacing: 8.0,
       crossAxisSpacing: 8.0,
@@ -34,17 +34,15 @@ class _Item extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              // @TODO игнорируется высота
               // @TODO сделать градиент без стека
-              height: 600,
               decoration: BoxDecoration(
                 image: DecorationImage(
+                  fit: BoxFit.fitHeight,
                   image: NetworkImage(cocktailDefinition.drinkThumbUrl),
                 ),
               ),
             ),
             Container(
-              height: 600,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: FractionalOffset.topCenter,
