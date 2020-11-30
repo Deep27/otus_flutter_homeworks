@@ -8,11 +8,24 @@ import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dar
 import 'package:http/http.dart' as http;
 
 class CocktailCategoryService {
+  static final CocktailCategoryService _singleton =
+      CocktailCategoryService._internal();
+
+  factory CocktailCategoryService() {
+    return _singleton;
+  }
+
+  CocktailCategoryService._internal();
+
   final _cocktailCategoryStreamController =
       StreamController<dynamic>.broadcast();
 
   Stream<dynamic> get onCocktailReceiveEvent =>
       _cocktailCategoryStreamController.stream;
+
+  CocktailCategory _tappedCategory = CocktailCategory.first;
+
+  CocktailCategory get tappedCategory => _tappedCategory;
 
   void dispose() {
     _cocktailCategoryStreamController?.close();
@@ -21,6 +34,8 @@ class CocktailCategoryService {
   Future<void> fetchCocktailsByCocktailCategory(
       CocktailCategory category) async {
     _cocktailCategoryStreamController.add(null);
+
+    _tappedCategory = category;
 
     final url =
         '${AsyncCocktailRepository.baseUrl}/filter.php?c=${category.value}';

@@ -11,6 +11,7 @@ class CocktailTypeFilter extends StatelessWidget {
       : cocktailCategories = cocktailCategories?.toList(),
         super(key: key);
 
+  final _cocktailCategoryService = CocktailCategoryService();
   final CocktailCategoryService cocktailCategoryService;
   final List<CocktailCategory> cocktailCategories;
 
@@ -31,6 +32,7 @@ class CocktailTypeFilter extends StatelessWidget {
                     // @TODO проверить, принял ли данные sink (не используя класс Response)
                     // @TODO чтобы все кнопки стали активными
                     enabled: snapshot.data != null,
+                    tapped: c == _cocktailCategoryService.tappedCategory,
                     onTap: () => cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(c),
                   ))
@@ -58,12 +60,14 @@ class _Item extends StatelessWidget {
   _Item(
       {@required this.category,
       @required this.enabled,
+      @required this.tapped,
       @required this.onTap,
       Key key})
       : super(key: key);
 
   final CocktailCategory category;
   final bool enabled;
+  final bool tapped;
   final Function onTap;
 
   @override
@@ -75,7 +79,9 @@ class _Item extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
           border: Border.all(width: 1.0, color: AppColors.aBorderColor),
-          color: AppColors.aFilterItemBgColor,
+          color: tapped
+              ? AppColors.aActiveFilterItemBgColor
+              : AppColors.aFilterItemBgColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
