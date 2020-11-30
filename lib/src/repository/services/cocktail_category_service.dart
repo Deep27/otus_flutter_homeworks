@@ -8,15 +8,6 @@ import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dar
 import 'package:http/http.dart' as http;
 
 class CocktailCategoryService {
-  static final CocktailCategoryService _singleton =
-      CocktailCategoryService._internal();
-
-  factory CocktailCategoryService() {
-    return _singleton;
-  }
-
-  CocktailCategoryService._internal();
-
   final _cocktailCategoryStreamController =
       StreamController<dynamic>.broadcast();
 

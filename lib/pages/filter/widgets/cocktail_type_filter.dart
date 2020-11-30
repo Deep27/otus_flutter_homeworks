@@ -11,7 +11,6 @@ class CocktailTypeFilter extends StatelessWidget {
       : cocktailCategories = cocktailCategories?.toList(),
         super(key: key);
 
-  final _cocktailCategoryService = CocktailCategoryService();
   final CocktailCategoryService cocktailCategoryService;
   final List<CocktailCategory> cocktailCategories;
 
@@ -32,7 +31,7 @@ class CocktailTypeFilter extends StatelessWidget {
                     // @TODO проверить, принял ли данные sink (не используя класс Response)
                     // @TODO чтобы все кнопки стали активными
                     enabled: snapshot.data != null,
-                    tapped: c == _cocktailCategoryService.tappedCategory,
+                    tapped: c == cocktailCategoryService.tappedCategory,
                     onTap: () => cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(c),
                   ))
