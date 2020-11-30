@@ -10,13 +10,23 @@ import 'package:flutter/material.dart';
 
 // @TODO при запуске приложения экран зависает, помогает hotReload
 
-class FilterPage extends StatelessWidget {
+class FilterPage extends StatefulWidget {
+  @override
+  _FilterPageState createState() => _FilterPageState();
+}
+
+class _FilterPageState extends State<FilterPage> {
   final _cocktailCategoryService = CocktailCategoryService();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     _cocktailCategoryService
         .fetchCocktailsByCocktailCategory(CocktailCategory.first);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.aBackgroundColor,
       body: SafeArea(
@@ -42,7 +52,8 @@ class FilterPage extends StatelessWidget {
                         child: Center(child: Text(snapshot.data)),
                       );
                     } else {
-                      return Expanded(child: Center(child: Text('Unknown error')));
+                      return Expanded(
+                          child: Center(child: Text('Unknown error')));
                     }
                   }
                 } else if (snapshot.hasError) {
