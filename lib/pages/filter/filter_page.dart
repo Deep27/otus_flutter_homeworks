@@ -46,7 +46,6 @@ class FilterPage extends StatelessWidget {
                       child: Center(child: Loading()),
                     );
                   }
-                  // @TODO не удается попасть в блок
                 } else if (snapshot.hasError) {
                   return Expanded(child: Center(child: Text(snapshot.error)));
                 } else {

@@ -37,28 +37,39 @@ class CocktailCategoryService {
 
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
-      var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks
-          .cast<Map<String, dynamic>>()
-          .map((json) => CocktailDefinitionDto.fromJson(json));
+      try {
+        final drinks = jsonResponse['drinks'] as Iterable<dynamic>;
+        final dtos = drinks
+            .cast<Map<String, dynamic>>()
+            .map((json) => CocktailDefinitionDto.fromJson(json));
 
-      for (final dto in dtos) {
-        result.add(CocktailDefinition(
-          id: dto.idDrink,
-          isFavourite: true,
-          name: dto.strDrink,
-          drinkThumbUrl: dto.strDrinkThumb,
-        ));
+        for (final dto in dtos) {
+          result.add(CocktailDefinition(
+            id: dto.idDrink,
+            isFavourite: true,
+            name: dto.strDrink,
+            drinkThumbUrl: dto.strDrinkThumb,
+          ));
+        }
+        _cocktailCategoryStreamController.add(
+            Response<List<CocktailDefinition>>(
+                status: QueryStatus.success, response: result.toList()));
+      } catch (e) {
+        if (jsonResponse['drinks'] == 'None Found') {
+          _cocktailCategoryStreamController
+              .add(Response<List<CocktailDefinition>>(
+            status: QueryStatus.success,
+            response: [],
+          ));
+        } else {
+          _cocktailCategoryStreamController.addError('Unknown error');
+        }
       }
     } else {
-//      throw HttpException('Request failed with status: ${response.statusCode}');
       _cocktailCategoryStreamController
           .addError('Status code ${response.statusCode}');
     }
-
-    _cocktailCategoryStreamController.add(Response<List<CocktailDefinition>>(
-        status: QueryStatus.success, response: result.toList()));
 
     return result;
   }
