@@ -5,8 +5,6 @@ import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
-import 'package:cocktaildbhttpusing/src/repository/query_status.dart';
-import 'package:cocktaildbhttpusing/src/repository/response.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
 import 'package:flutter/material.dart';
 
@@ -33,18 +31,19 @@ class FilterPage extends StatelessWidget {
               stream: _cocktailCategoryService.onCocktailReceiveEvent,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final response =
-                      snapshot.data as Response<List<CocktailDefinition>>;
-                  if (response.status == QueryStatus.success) {
+                  if (snapshot.data is List<CocktailDefinition>) {
+                    final response = snapshot.data as List<CocktailDefinition>;
                     return Expanded(
-                      child: CocktailsGrid((snapshot.data
-                      as Response<List<CocktailDefinition>>)
-                          .response),
+                      child: CocktailsGrid(response),
                     );
                   } else {
-                    return Expanded(
-                      child: Center(child: Loading()),
-                    );
+                    if (snapshot.data is String) {
+                      return Expanded(
+                        child: Center(child: Text(snapshot.data)),
+                      );
+                    } else {
+                      return Expanded(child: Center(child: Text('Unknown error')));
+                    }
                   }
                 } else if (snapshot.hasError) {
                   return Expanded(child: Center(child: Text(snapshot.error)));

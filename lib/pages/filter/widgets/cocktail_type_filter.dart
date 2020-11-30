@@ -1,8 +1,6 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
 
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
-import 'package:cocktaildbhttpusing/src/repository/query_status.dart';
-import 'package:cocktaildbhttpusing/src/repository/response.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +30,7 @@ class CocktailTypeFilter extends StatelessWidget {
                     category: c,
                     // @TODO проверить, принял ли данные sink (не используя класс Response)
                     // @TODO чтобы все кнопки стали активными
-                    enabled: (snapshot.data as Response)?.status ==
-                        QueryStatus.success,
+                    enabled: snapshot.data != null,
                     onTap: () => cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(c),
                   ))
