@@ -1,5 +1,5 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
-//import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
+
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/query_status.dart';
 import 'package:cocktaildbhttpusing/src/repository/response.dart';
@@ -27,16 +27,13 @@ class CocktailTypeFilter extends StatelessWidget {
       child: StreamBuilder(
         stream: cocktailCategoryService.onCocktailReceiveEvent,
         builder: (stream, snapshot) {
-          // @TODO проверить, принял ли данные sink (не используя класс Response)
-          // @TODO чтобы все кнопки стали активными
-          final hasData = snapshot.hasError ||
-              (snapshot.hasData &&
-                  ((snapshot.data as Response).status != QueryStatus.waiting));
-
           List<_Item> cocktailCategoryItems = cocktailCategories
               ?.map((c) => _Item(
                     category: c,
-                    enabled: hasData,
+                    // @TODO проверить, принял ли данные sink (не используя класс Response)
+                    // @TODO чтобы все кнопки стали активными
+                    enabled: (snapshot.data as Response)?.status ==
+                        QueryStatus.success,
                     onTap: () => cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(c),
                   ))

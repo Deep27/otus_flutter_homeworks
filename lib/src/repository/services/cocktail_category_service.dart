@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert' as convert;
-//import 'dart:io';
 
 import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
@@ -60,7 +59,7 @@ class CocktailCategoryService {
           _cocktailCategoryStreamController
               .add(Response<List<CocktailDefinition>>(
             status: QueryStatus.success,
-            response: [],
+            response: [], // @TODO return 'none found' response
           ));
         } else {
           _cocktailCategoryStreamController.addError('Unknown error');

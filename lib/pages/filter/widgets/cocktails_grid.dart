@@ -1,5 +1,4 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
-//import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:flutter/material.dart';
 
@@ -34,16 +33,7 @@ class _Item extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              // @TODO сделать градиент без стека
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fitHeight,
-                  image: NetworkImage(cocktailDefinition.drinkThumbUrl),
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
+              foregroundDecoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter,
@@ -53,11 +43,21 @@ class _Item extends StatelessWidget {
                   ],
                 ),
               ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fitHeight,
+                  image: NetworkImage(cocktailDefinition.drinkThumbUrl),
+                ),
+              ),
             ),
-            Positioned(
-              bottom: 0.0,
-              child: _CocktailInfo(cocktailDefinition),
-            ),
+            LayoutBuilder(builder: (ctx, constraints) {
+              return Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: constraints.maxWidth,
+                child: _CocktailInfo(cocktailDefinition),
+              );
+            }),
           ],
         ),
       ),
@@ -75,6 +75,7 @@ class _CocktailInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -91,12 +92,9 @@ class _CocktailInfo extends StatelessWidget {
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
-              child: Flexible(
-                // @TODO задать границы тексту по ширине
-                child: Text(
-                  'id: ${cocktailDefinition.id}',
-                  style: Theme.of(context).textTheme.headline2,
-                ),
+              child: Text(
+                'id: ${cocktailDefinition.id}',
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
           ),
