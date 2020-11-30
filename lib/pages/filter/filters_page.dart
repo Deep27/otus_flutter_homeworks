@@ -1,11 +1,12 @@
 import 'package:cocktaildbhttpusing/pages/common/loading.dart';
-import 'package:cocktaildbhttpusing/pages/filter/widgets/filter/slivers/cocktail_type_filter.dart';
-import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktails_grid.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
+import 'package:cocktaildbhttpusing/pages/filter/widgets/slivers/cocktail_types_filter.dart';
+import 'package:cocktaildbhttpusing/pages/filter/widgets/slivers/cocktails_grid.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // @TODO при запуске приложения экран зависает, помогает hotReload
@@ -34,45 +35,19 @@ class _FilterPageState extends State<FilterPage> {
         child: Column(
           children: [
             SearchField(),
-//            CocktailTypeFilter(
-//              widget._cocktailCategoryService,
-//              CocktailCategory.values.toList(),
-//            ),
             Expanded(
               child: StreamBuilder(
                 stream: widget._cocktailCategoryService.onCocktailReceiveEvent,
                 builder: (context, snapshot) {
                   return CustomScrollView(
                     slivers: [
-                      CocktailTypeFilter(
+                      CocktailTypesFilter(
                         widget._cocktailCategoryService,
                         CocktailCategory.values.toList(),
                       ).sliver,
+                      _checkSnapshot(snapshot),
                     ],
                   );
-//                if (snapshot.hasData) {
-//                  if (snapshot.data is List<CocktailDefinition>) {
-//                    final response = snapshot.data as List<CocktailDefinition>;
-//                    return Expanded(
-//                      child: CocktailsGrid(response),
-//                    );
-//                  } else {
-//                    if (snapshot.data is String) {
-//                      return Expanded(
-//                        child: Center(child: Text(snapshot.data)),
-//                      );
-//                    } else {
-//                      return Expanded(
-//                          child: Center(child: Text('Unknown error')));
-//                    }
-//                  }
-//                } else if (snapshot.hasError) {
-//                  return Expanded(child: Center(child: Text(snapshot.error)));
-//                } else {
-//                  return Expanded(
-//                    child: Center(child: Loading()),
-//                  );
-//                }
                 },
               ),
             ),
@@ -80,5 +55,23 @@ class _FilterPageState extends State<FilterPage> {
         ),
       ),
     );
+  }
+
+  Widget _checkSnapshot(AsyncSnapshot<dynamic> snapshot) {
+    if (snapshot.hasData) {
+      if (snapshot.data is List<CocktailDefinition>) {
+        return CocktailsGrid(snapshot.data).sliver;
+      } else if (snapshot.data is String) {
+        return SliverFillRemaining(child: Center(child: Text(snapshot.data)));
+      } else {
+        return SliverFillRemaining(
+          child: const Center(child: Text('Unknown error')),
+        );
+      }
+    } else if (snapshot.hasError) {
+      return SliverFillRemaining(child: Center(child: Text(snapshot.error)));
+    } else {
+      return SliverFillRemaining(child: const Center(child: Loading()));
+    }
   }
 }

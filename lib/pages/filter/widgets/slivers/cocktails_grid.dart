@@ -2,22 +2,25 @@ import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:flutter/material.dart';
 
-class CocktailsGrid extends StatelessWidget {
-  CocktailsGrid(this.cocktails, {Key key}) : super(key: key);
+class CocktailsGrid {
+  CocktailsGrid(this.cocktails);
 
   final List<CocktailDefinition> cocktails;
 
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 2 / 3,
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      mainAxisSpacing: 8.0,
-      crossAxisSpacing: 8.0,
-      children: cocktails.map((cd) => _Item(cd)).toList(),
-    );
-  }
+  SliverPadding get sliver => SliverPadding(
+        padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
+        sliver: SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2 / 3,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 8.0,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (ctx, i) => _Item(cocktails[i]),
+          ),
+        ),
+      );
 }
 
 class _Item extends StatelessWidget {
@@ -50,6 +53,9 @@ class _Item extends StatelessWidget {
                 ),
               ),
             ),
+            // @TODO возникает ошибка 'Incorrect use of ParentDataWidget'
+            // @TODO Typically, Positioned widgets are placed directly inside Stack widgets
+            // @TODO разместить LayoutBuilder над Stack правильно не выходит
             LayoutBuilder(builder: (ctx, constraints) {
               return Positioned(
                 bottom: 0.0,

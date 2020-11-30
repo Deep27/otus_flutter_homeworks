@@ -12,6 +12,9 @@ import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {
+
+  const AsyncCocktailRepository();
+
   static const baseUrl = 'https://the-cocktail-db.p.rapidapi.com';
 
   static const Map<String, String> headers = const {

@@ -4,8 +4,8 @@ import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
 import 'package:flutter/material.dart';
 
-class CocktailTypeFilter {
-  CocktailTypeFilter(CocktailCategoryService cocktailCategoryService,
+class CocktailTypesFilter {
+  CocktailTypesFilter(CocktailCategoryService cocktailCategoryService,
       Iterable<CocktailCategory> cocktailCategories,
       {Key key})
       : _cocktailCategoryService = cocktailCategoryService,
@@ -30,7 +30,7 @@ class CocktailTypeFilter {
                   final category = _cocktailCategories[i];
                   return _Item(
                     category: category,
-                    enabled: snapshot.data != null,
+                    enabled: snapshot.data != null || snapshot.hasError,
                     tapped: category == _cocktailCategoryService.tappedCategory,
                     onTap: () => _cocktailCategoryService
                         .fetchCocktailsByCocktailCategory(category),
