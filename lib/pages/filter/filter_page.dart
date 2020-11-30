@@ -1,5 +1,5 @@
 import 'package:cocktaildbhttpusing/pages/common/loading.dart';
-import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktail_type_filter.dart';
+import 'package:cocktaildbhttpusing/pages/filter/widgets/filter/slivers/cocktail_type_filter.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/cocktails_grid.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
