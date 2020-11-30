@@ -4,55 +4,43 @@ import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
 import 'package:flutter/material.dart';
 
-class CocktailTypeFilter extends StatelessWidget {
-  CocktailTypeFilter(this.cocktailCategoryService,
+class CocktailTypeFilter {
+  CocktailTypeFilter(CocktailCategoryService cocktailCategoryService,
       Iterable<CocktailCategory> cocktailCategories,
       {Key key})
-      : cocktailCategories = cocktailCategories?.toList(),
-        super(key: key);
+      : _cocktailCategoryService = cocktailCategoryService,
+        _cocktailCategories = cocktailCategories?.toList();
 
-  final CocktailCategoryService cocktailCategoryService;
-  final List<CocktailCategory> cocktailCategories;
+  final CocktailCategoryService _cocktailCategoryService;
+  final List<CocktailCategory> _cocktailCategories;
 
-  @override
-  Widget build(BuildContext context) {
-    // @TODO без указания констрейнтов не компилится
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minWidth: double.infinity,
-        maxHeight: 60.0,
-      ),
-      child: StreamBuilder(
-        stream: cocktailCategoryService.onCocktailReceiveEvent,
-        builder: (stream, snapshot) {
-          List<_Item> cocktailCategoryItems = cocktailCategories
-              ?.map((c) => _Item(
-                    category: c,
-                    // @TODO проверить, принял ли данные sink (не используя класс Response)
-                    // @TODO чтобы все кнопки стали активными
+  SliverToBoxAdapter get sliver => SliverToBoxAdapter(
+        child: Container(
+          // @TODO не хардкодить высоту
+          height: 60,
+          child: StreamBuilder(
+            stream: _cocktailCategoryService.onCocktailReceiveEvent,
+            builder: (ctx, snapshot) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _cocktailCategories == null
+                    ? 0
+                    : _cocktailCategories.length,
+                itemBuilder: (ctx, i) {
+                  final category = _cocktailCategories[i];
+                  return _Item(
+                    category: category,
                     enabled: snapshot.data != null,
-                    tapped: c == cocktailCategoryService.tappedCategory,
-                    onTap: () => cocktailCategoryService
-                        .fetchCocktailsByCocktailCategory(c),
-                  ))
-              ?.toList();
-          return CustomScrollView(
-            scrollDirection: Axis.horizontal,
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  List.generate(
-                    cocktailCategoryItems?.length,
-                    (i) => cocktailCategoryItems[i],
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
+                    tapped: category == _cocktailCategoryService.tappedCategory,
+                    onTap: () => _cocktailCategoryService
+                        .fetchCocktailsByCocktailCategory(category),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      );
 }
 
 class _Item extends StatelessWidget {
