@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
 
-//const String _bebasFontFamily = 'BebasNeue';
+// const String _bebasFontFamily = 'BebasNeue';
 
 IconThemeData buildAppIconTheme() => IconThemeData(
       color: Colors.white,
