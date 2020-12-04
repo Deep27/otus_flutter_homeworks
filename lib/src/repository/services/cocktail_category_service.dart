@@ -1,4 +1,5 @@
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
+import 'package:flutter/cupertino.dart';
 
 class CocktailCategoryService {
   static final CocktailCategoryService _cocktailCategoryService =
@@ -10,7 +11,8 @@ class CocktailCategoryService {
 
   CocktailCategoryService._();
 
-  CocktailCategory tappedCategory = CocktailCategory.first;
+  ValueNotifier<CocktailCategory> tappedCategory =
+      ValueNotifier(CocktailCategory.first);
   List<CocktailCategory> _cocktailCategories = CocktailCategory.values.toList();
 
   List<CocktailCategory> get cocktailCategories => _cocktailCategories;

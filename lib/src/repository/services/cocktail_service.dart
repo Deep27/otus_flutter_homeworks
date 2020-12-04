@@ -32,7 +32,7 @@ class CocktailService {
       CocktailCategory category) async {
     _cocktailStreamController.add(null);
 
-    _cocktailCategoryService.tappedCategory = category;
+    _cocktailCategoryService.tappedCategory.value = category;
 
     final url =
         '${AsyncCocktailRepository.baseUrl}/filter.php?c=${category.value}';
