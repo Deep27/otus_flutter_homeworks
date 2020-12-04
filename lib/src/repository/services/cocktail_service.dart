@@ -18,16 +18,17 @@ class CocktailService {
   CocktailService._();
 
   final _cocktailCategoryService = CocktailCategoryService();
-  final _cocktailStreamController = StreamController<dynamic>.broadcast();
+  final _cocktailStreamController =
+      StreamController<Iterable<CocktailDefinition>>.broadcast();
 
-  Stream<dynamic> get onCocktailReceiveEvent =>
+  Stream<Iterable<CocktailDefinition>> get onCocktailReceiveEvent =>
       _cocktailStreamController.stream;
 
   void dispose() {
     _cocktailStreamController?.close();
   }
 
-  Future<void> fetchCocktailsByCocktailCategory(
+  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(
       CocktailCategory category) async {
     _cocktailStreamController.add(null);
 
@@ -40,6 +41,7 @@ class CocktailService {
       headers: AsyncCocktailRepository.headers,
     );
 
+    final result = <CocktailDefinition>[];
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
       try {
@@ -48,7 +50,6 @@ class CocktailService {
             .cast<Map<String, dynamic>>()
             .map((json) => CocktailDefinitionDto.fromJson(json));
 
-        final result = <CocktailDefinition>[];
         for (final dto in dtos) {
           result.add(CocktailDefinition(
             id: dto.idDrink,
@@ -57,12 +58,13 @@ class CocktailService {
             drinkThumbUrl: dto.strDrinkThumb,
           ));
         }
-        _cocktailStreamController.add(result.toList());
-      } catch (_) {
-        _cocktailStreamController.add(jsonResponse['drinks']);
+      } catch (_) {} finally {
+        _cocktailStreamController.add(result);
       }
     } else {
       _cocktailStreamController.addError('Status code ${response.statusCode}');
     }
+
+    return result;
   }
 }
