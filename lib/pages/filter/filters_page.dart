@@ -1,4 +1,3 @@
-import 'package:cocktaildbhttpusing/pages/cocktail_detail/cocktail_detail_page.dart';
 import 'package:cocktaildbhttpusing/pages/common/loading.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/slivers/cocktail_types_filter.dart';
