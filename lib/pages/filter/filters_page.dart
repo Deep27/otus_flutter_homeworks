@@ -32,23 +32,26 @@ class _FilterPageState extends State<FilterPage> {
     return Scaffold(
       backgroundColor: AppColors.aBackgroundColor,
       body: SafeArea(
-        child: Column(
-          children: [
-            SearchField(),
-            Expanded(
-              child: StreamBuilder(
-                stream: widget._cocktailService.onCocktailReceiveEvent,
-                builder: (context, snapshot) {
-                  return CustomScrollView(
-                    slivers: [
-                      CocktailTypesFilter().sliver,
-                      _checkSnapshot(snapshot),
-                    ],
-                  );
-                },
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          child: Column(
+            children: [
+              SearchField(),
+              Expanded(
+                child: StreamBuilder(
+                  stream: widget._cocktailService.onCocktailReceiveEvent,
+                  builder: (context, snapshot) {
+                    return CustomScrollView(
+                      slivers: [
+                        CocktailTypesFilter().sliver,
+                        _checkSnapshot(snapshot),
+                      ],
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
