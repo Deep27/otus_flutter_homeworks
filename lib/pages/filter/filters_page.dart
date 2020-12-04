@@ -3,9 +3,9 @@ import 'package:cocktaildbhttpusing/pages/filter/widgets/seach_field.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/slivers/cocktail_types_filter.dart';
 import 'package:cocktaildbhttpusing/pages/filter/widgets/slivers/cocktails_grid.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
-import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
-import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
+import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
+import 'package:cocktaildbhttpusing/src/repository/services/cocktail_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 // @TODO висит только надпись 'Loading'
 
 class FilterPage extends StatefulWidget {
-  final _cocktailCategoryService = CocktailCategoryService();
+  final _cocktailService = CocktailService();
 
   @override
   _FilterPageState createState() => _FilterPageState();
@@ -22,7 +22,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   @override
   void initState() {
-    widget._cocktailCategoryService
+    widget._cocktailService
         .fetchCocktailsByCocktailCategory(CocktailCategory.first);
     super.initState();
   }
@@ -37,14 +37,11 @@ class _FilterPageState extends State<FilterPage> {
             SearchField(),
             Expanded(
               child: StreamBuilder(
-                stream: widget._cocktailCategoryService.onCocktailReceiveEvent,
+                stream: widget._cocktailService.onCocktailReceiveEvent,
                 builder: (context, snapshot) {
                   return CustomScrollView(
                     slivers: [
-                      CocktailTypesFilter(
-                        widget._cocktailCategoryService,
-                        CocktailCategory.values.toList(),
-                      ).sliver,
+                      CocktailTypesFilter().sliver,
                       _checkSnapshot(snapshot),
                     ],
                   );

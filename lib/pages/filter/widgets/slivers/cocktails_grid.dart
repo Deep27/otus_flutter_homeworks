@@ -53,17 +53,12 @@ class _Item extends StatelessWidget {
                 ),
               ),
             ),
-            // @TODO возникает ошибка 'Incorrect use of ParentDataWidget'
-            // @TODO Typically, Positioned widgets are placed directly inside Stack widgets
-            // @TODO разместить LayoutBuilder над Stack правильно не выходит
-            LayoutBuilder(builder: (ctx, constraints) {
-              return Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: constraints.maxWidth,
-                child: _CocktailInfo(cocktailDefinition),
-              );
-            }),
+            Positioned(
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: _CocktailInfo(cocktailDefinition),
+            ),
           ],
         ),
       ),

@@ -2,37 +2,32 @@ import 'package:cocktaildbhttpusing/res/colors.dart';
 
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
+import 'package:cocktaildbhttpusing/src/repository/services/cocktail_service.dart';
 import 'package:flutter/material.dart';
 
 class CocktailTypesFilter {
-  CocktailTypesFilter(CocktailCategoryService cocktailCategoryService,
-      Iterable<CocktailCategory> cocktailCategories,
-      {Key key})
-      : _cocktailCategoryService = cocktailCategoryService,
-        _cocktailCategories = cocktailCategories?.toList();
-
-  final CocktailCategoryService _cocktailCategoryService;
-  final List<CocktailCategory> _cocktailCategories;
+  final _cocktailService = CocktailService();
+  final _cocktailCategoryService = CocktailCategoryService();
 
   SliverToBoxAdapter get sliver => SliverToBoxAdapter(
         child: Container(
-          // @TODO не хардкодить высоту
-          height: 60,
+          height: 53,
           child: StreamBuilder(
-            stream: _cocktailCategoryService.onCocktailReceiveEvent,
+            stream: _cocktailService.onCocktailReceiveEvent,
             builder: (ctx, snapshot) {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _cocktailCategories == null
+                itemCount: _cocktailCategoryService.cocktailCategories == null
                     ? 0
-                    : _cocktailCategories.length,
+                    : _cocktailCategoryService.cocktailCategories.length,
                 itemBuilder: (ctx, i) {
-                  final category = _cocktailCategories[i];
+                  final category =
+                      _cocktailCategoryService.cocktailCategories[i];
                   return _Item(
                     category: category,
                     enabled: snapshot.data != null || snapshot.hasError,
                     tapped: category == _cocktailCategoryService.tappedCategory,
-                    onTap: () => _cocktailCategoryService
+                    onTap: () => _cocktailService
                         .fetchCocktailsByCocktailCategory(category),
                   );
                 },
