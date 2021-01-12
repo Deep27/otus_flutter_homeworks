@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
 
 class ImageHeader extends StatelessWidget {
-  ImageHeader(this.imagePath);
+  const ImageHeader(this.imagePath);
 
   final String imagePath;
 
-  final AsyncCocktailRepository cocktailApi = AsyncCocktailRepository();
+  final AsyncCocktailRepository cocktailApi = const AsyncCocktailRepository();
 
   @override
   Widget build(BuildContext context) {

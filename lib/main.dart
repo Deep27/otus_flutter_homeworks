@@ -1,11 +1,11 @@
-import 'package:cocktaildbhttpusing/src/models.dart';
+import 'package:cocktaildbhttpusing/pages/filter/filters_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cocktaildbhttpusing/res/styles.dart';
 
-import 'pages/cocktail_detail/cocktail_detail_page.dart';
+//import 'pages/cocktail_detail/cocktail_detail_page.dart';
 
 void main() {
-  final cocktail = SyncCocktailRepository().getHomeworkCocktail();
+//  final cocktail = SyncCocktailRepository().getHomeworkCocktail();
   runApp(
     MaterialApp(
       title: 'Flutter Demo',
@@ -15,7 +15,8 @@ void main() {
         textTheme: buildAppTextTheme(),
       ),
       home: Material(
-        child: CocktailDetailPage(cocktail),
+//        child: CocktailDetailPage(cocktail),
+        child: FilterPage(),
       ),
     ),
   );
