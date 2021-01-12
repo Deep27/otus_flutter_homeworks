@@ -26,5 +26,5 @@ class Ingredient {
       type: ingredientDto.strType,
       alcohol: ingredientDto.strAlcohol,
       abv: ingredientDto.strABV,
-      isAlcoholic: ingredientDto.strAlcohol != null);
+      isAlcoholic: ingredientDto.strAlcohol == 'yes');
 }
