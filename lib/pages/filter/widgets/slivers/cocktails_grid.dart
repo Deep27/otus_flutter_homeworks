@@ -1,24 +1,26 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
-//import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:flutter/material.dart';
 
-class CocktailsGrid extends StatelessWidget {
-  CocktailsGrid(this.cocktails, {Key key}) : super(key: key);
+class CocktailsGrid {
+  CocktailsGrid(this.cocktails);
 
   final List<CocktailDefinition> cocktails;
 
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 2 / 3,
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
-      mainAxisSpacing: 8.0,
-      crossAxisSpacing: 8.0,
-      children: cocktails.map((cd) => _Item(cd)).toList(),
-    );
-  }
+  SliverPadding get sliver => SliverPadding(
+        padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
+        sliver: SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2 / 3,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 8.0,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (ctx, i) => _Item(cocktails[i]),
+          ),
+        ),
+      );
 }
 
 class _Item extends StatelessWidget {
@@ -34,16 +36,7 @@ class _Item extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              // @TODO сделать градиент без стека
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fitHeight,
-                  image: NetworkImage(cocktailDefinition.drinkThumbUrl),
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
+              foregroundDecoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter,
@@ -53,9 +46,17 @@ class _Item extends StatelessWidget {
                   ],
                 ),
               ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fitHeight,
+                  image: NetworkImage(cocktailDefinition.drinkThumbUrl),
+                ),
+              ),
             ),
             Positioned(
               bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
               child: _CocktailInfo(cocktailDefinition),
             ),
           ],
@@ -75,6 +76,7 @@ class _CocktailInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -91,12 +93,9 @@ class _CocktailInfo extends StatelessWidget {
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
-              child: Flexible(
-                // @TODO задать границы тексту по ширине
-                child: Text(
-                  'id: ${cocktailDefinition.id}',
-                  style: Theme.of(context).textTheme.headline2,
-                ),
+              child: Text(
+                'id: ${cocktailDefinition.id}',
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
           ),

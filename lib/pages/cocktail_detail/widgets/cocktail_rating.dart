@@ -13,6 +13,7 @@ class CocktailRating extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
       width: double.infinity,
       color: AppColors.ratingBgColor,
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[

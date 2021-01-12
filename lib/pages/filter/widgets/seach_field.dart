@@ -7,8 +7,15 @@ class SearchField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        // @TODO не удается задать цвет границе
         decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColors.aBorderColor,
+            ),
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(32.0),
+            ),
+          ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColors.aHintColor,
@@ -21,7 +28,10 @@ class SearchField extends StatelessWidget {
           hintText: 'What to search?',
           hintStyle: const TextStyle(color: AppColors.aHintColor),
           prefixIcon: const Icon(Icons.search, color: Colors.white),
-          suffixIcon: const Icon(Icons.close, color: AppColors.aHintColor),
+          suffixIcon: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: const Icon(Icons.close, color: AppColors.aHintColor),
+          ),
         ),
         maxLines: 1,
       ),
