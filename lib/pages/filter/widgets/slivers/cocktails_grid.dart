@@ -1,6 +1,11 @@
+import 'dart:typed_data';
+
+import 'package:cocktaildbhttpusing/pages/cocktail_detail/cocktail_detail_page.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
+import 'package:cocktaildbhttpusing/res/ids.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CocktailsGrid {
   CocktailsGrid(this.cocktails);
@@ -35,21 +40,37 @@ class _Item extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
         child: Stack(
           children: <Widget>[
-            Container(
-              foregroundDecoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: FractionalOffset.topCenter,
-                  end: FractionalOffset.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black,
-                  ],
-                ),
-              ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fitHeight,
-                  image: NetworkImage(cocktailDefinition.drinkThumbUrl),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return CocktailDetailPage(
+                    cocktailDefinition.id,
+                    cocktailDefinition.drinkThumbUrl,
+                  );
+                }));
+              },
+              child: Hero(
+                tag: '${Ids.heroCocktailDetails}${cocktailDefinition.id}',
+                child: Container(
+                  foregroundDecoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: FractionalOffset.topCenter,
+                      end: FractionalOffset.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black,
+                      ],
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fitHeight,
+                      image:
+                          // @TODO if url is null
+                          // Image.asset('assets/images/drink.png')
+                          NetworkImage(cocktailDefinition.drinkThumbUrl),
+                    ),
+                  ),
                 ),
               ),
             ),

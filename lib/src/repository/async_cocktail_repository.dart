@@ -22,28 +22,6 @@ class AsyncCocktailRepository {
     'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
   };
 
-  Future<Cocktail> fetchCocktailDetails(String id) async {
-    Cocktail result;
-
-    var response =
-        await http.get('$baseUrl/lookup.php?i=$id', headers: headers);
-    if (response.statusCode == 200) {
-      final jsonResponse = convert.jsonDecode(response.body);
-      var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
-
-      final dtos = drinks
-          .cast<Map<String, dynamic>>()
-          .map((json) => CocktailDto.fromJson(json));
-      if (dtos.length > 0) {
-        result = Cocktail.fromDto(dtos.first);
-      }
-    } else {
-      throw HttpException('Request failed with status: ${response.statusCode}');
-    }
-
-    return result;
-  }
-
   Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailType(
       CocktailType cocktailType) async {
     var result = <CocktailDefinition>[];

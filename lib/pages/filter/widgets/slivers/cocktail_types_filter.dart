@@ -1,19 +1,18 @@
 import 'package:cocktaildbhttpusing/res/colors.dart';
-
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/repository/services/cocktail_category_service.dart';
-import 'package:cocktaildbhttpusing/src/repository/services/cocktail_service.dart';
+import 'package:cocktaildbhttpusing/src/repository/services/cocktail_definition_service.dart';
 import 'package:flutter/material.dart';
 
 class CocktailTypesFilter {
-  final _cocktailService = CocktailService();
+  final _cocktailDefinitionService = CocktailDefinitionService();
   final _cocktailCategoryService = CocktailCategoryService();
 
   SliverToBoxAdapter get sliver => SliverToBoxAdapter(
         child: Container(
           height: 53,
           child: StreamBuilder(
-            stream: _cocktailService.onCocktailReceiveEvent,
+            stream: _cocktailDefinitionService.onCocktailDefinitionReceiveEvent,
             builder: (ctx, snapshot) {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -27,8 +26,8 @@ class CocktailTypesFilter {
                     category: category,
                     enabled: snapshot.data != null || snapshot.hasError,
                     tappedNotifier: _cocktailCategoryService.tappedCategory,
-                    onTap: () => _cocktailService
-                        .fetchCocktailsByCocktailCategory(category),
+                    onTap: () => _cocktailDefinitionService
+                        .fetchCocktailDefinitionsByCocktailCategory(category),
                   );
                 },
               );

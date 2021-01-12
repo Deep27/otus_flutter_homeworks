@@ -43,7 +43,7 @@ class _Ingredient extends StatelessWidget {
             name,
             style: TextStyle(decoration: TextDecoration.underline),
           ),
-          Text(measure),
+          Text(measure == null ? '?' : measure),
         ],
       ),
     );

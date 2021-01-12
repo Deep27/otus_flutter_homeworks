@@ -24,6 +24,7 @@ flutter:
   assets:
     - assets/images/mohito.jpg
     - assets/images/loading.png
+    - assets/images/drink.png
   fonts:
     - family: AppIcons
       fonts:
