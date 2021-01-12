@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:convert' as convert;
-import 'dart:io';
 
 import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
-import 'package:cocktaildbhttpusing/src/dto/cocktail_dto.dart';
-import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';

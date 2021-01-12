@@ -12,7 +12,10 @@ class ImageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.network(imageUrl),
+        Image.network(
+          imageUrl,
+          errorBuilder: (_, __, ___) => Image.asset('assets/images/drink.png'),
+        ),
         const Positioned(
           child: const Padding(
             padding: const EdgeInsets.all(24.0),

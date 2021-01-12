@@ -15,7 +15,6 @@ void main() {
         textTheme: buildAppTextTheme(),
       ),
       home: Material(
-//        child: CocktailDetailPage(cocktail),
         child: FilterPage(),
       ),
     ),

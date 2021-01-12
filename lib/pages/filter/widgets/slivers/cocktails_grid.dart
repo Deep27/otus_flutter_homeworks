@@ -1,11 +1,9 @@
-import 'dart:typed_data';
 
 import 'package:cocktaildbhttpusing/pages/cocktail_detail/cocktail_detail_page.dart';
 import 'package:cocktaildbhttpusing/res/colors.dart';
 import 'package:cocktaildbhttpusing/res/ids.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class CocktailsGrid {
   CocktailsGrid(this.cocktails);
